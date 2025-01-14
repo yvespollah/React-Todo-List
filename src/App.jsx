@@ -1,6 +1,6 @@
 // import { useState } from "react";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 
 
@@ -13,6 +13,9 @@ function App() {   // on vas cree les ccommposant fonctionel
     {id: 3 , nom: "pomme"}
 
   ]);
+ // deuxieme partie du state
+
+const [nouveauFruit , SetNouveauFruit] = useState("")
 
   // c'est possible de mettre du js dans une variable
 const voiture =  <li>rav4</li>
@@ -38,6 +41,30 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
   };
 
 
+  // formulaire
+
+  const handlesubmit = (event) => {
+    event.preventDefault(); // pour eviter le rechargement de la page
+    const fruitsCopie = [...fruits];
+
+    const id  = new Date().getTime();
+    const nom = nouveauFruit;
+    fruitsCopie.push({id: id , nom: nom})
+    setaFruits(fruitsCopie);
+    SetNouveauFruit("");
+
+    
+  }
+
+  const handleChange = (event) => {
+
+    const valueAfterChange = event.target.value
+    SetNouveauFruit(valueAfterChange);
+    
+    
+  }
+
+
   //-------------------------------------------------------------------------------------------------------------
   //  affichage (render)
 
@@ -52,9 +79,16 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
             {fruit.nom}<button onClick={() =>handleDelete(fruit.id)}>x</button>
           </li>
         ))}
-      
-
    </ul>
+        <form action="submit" onSubmit={handlesubmit}>
+          <input 
+          value={nouveauFruit} 
+          placeholder="Ajouter un fruit" 
+          onChange={handleChange}
+          />
+          <button>Ajouter +</button>
+        </form>
+
   </div>
   
   );
@@ -92,6 +126,31 @@ slice : permet de fair une copie de mon tab , une atres mettyhose est d'eclater 
 ----------------------------------------------------------
 
 la methode filter: cree un 2e tab en filtrant un 1r tab selon les condition
+
+
+
+***********************Gestion des formulaires****************
+
+1. creation du formulaire
+
+2. soumission du formulaire
+3a. collecte de donnes du formulaires
+3b. methode de sync descendant / ascendant
+
+NB: en js , l'orseque une fonction est lier au evenement , la fonction prend en parametre evenement . a travel levenment , on peur acceder a ces params
+
+NB: en react on ne manipule pas le dom. react le fait pour nous ( donc il ya pas les GetElemetbiid())
+soln
+
+hook ( useRef) : c'est une fxn de la librarie react qui cree une reference a un element
+NB: on evite le useref car il ne fournit pas le re render de l'affichage automatiquement car on ne modifie pas le state
+
+
+***** nous on vas preferer travailler avc le state*********
+evenement onChange
+
+push ajout un elementt en fin du tab
+
 
 
 */
