@@ -13,8 +13,9 @@ function App() {   // on vas cree les ccommposant fonctionel
     {id: 3 , nom: "pomme"}
 
   ]);
+ // deuxieme partie du state
 
-  const inputRef = useRef();
+const [nouveauFruit , SetNouveauFruit] = useState("")
 
   // c'est possible de mettre du js dans une variable
 const voiture =  <li>rav4</li>
@@ -44,8 +45,20 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
 
   const handlesubmit = (event) => {
     event.preventDefault(); // pour eviter le rechargement de la page
-    console.log(inputRef.current.value)
+    const fruitsCopie = [...fruits];
 
+    const id  = new Date().getTime();
+    const nom = nouveauFruit;
+    fruitsCopie.push({id: id , nom: nom})
+    setaFruits(fruitsCopie);
+
+    
+  }
+
+  const handleChange = (event) => {
+
+    const valueAfterChange = event.target.value
+    SetNouveauFruit(valueAfterChange)
   }
 
 
@@ -65,7 +78,11 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
         ))}
    </ul>
         <form action="submit" onSubmit={handlesubmit}>
-          <input ref={inputRef} type="text" placeholder="Ajouter un fruit" />
+          <input 
+          value={nouveauFruit} 
+          placeholder="Ajouter un fruit" 
+          onChange={handleChange}
+          />
           <button>Ajouter +</button>
         </form>
 
@@ -114,7 +131,8 @@ la methode filter: cree un 2e tab en filtrant un 1r tab selon les condition
 1. creation du formulaire
 
 2. soumission du formulaire
-3. collecte de donnes du formulaires
+3a. collecte de donnes du formulaires
+3b. methode de sync descendant / ascendant
 
 NB: en js , l'orseque une fonction est lier au evenement , la fonction prend en parametre evenement . a travel levenment , on peur acceder a ces params
 
@@ -125,7 +143,10 @@ hook ( useRef) : c'est une fxn de la librarie react qui cree une reference a un 
 NB: on evite le useref car il ne fournit pas le re render de l'affichage automatiquement car on ne modifie pas le state
 
 
-***** nous on vas preferer travailler avc le state
+***** nous on vas preferer travailler avc le state*********
+evenement onChange
+
+push ajout un elementt en fin du tab
 
 
 
