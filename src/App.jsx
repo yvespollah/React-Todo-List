@@ -1,31 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-// import './App.css'
+import { useState } from "react";
 
-export default function App() {
+
+
+function App() {   // on vas cree les ccommposant fonctionel
+
+  // state ( etat , data)
+  const [compteur , setCompteur] = useState(1) // je definit un state et jinitialise a 1 et je recuper dans la variable compteur , et je pourait modifier uniquement avecla variable setCompteur
+  
+  // COMPORTEMENT (se sont  fonction) . par preerence pour les compt, j vais utiliser les fxn flecher (const)
+  const handleClick = () => {
+    // verifier le le comportement est bien brancher a l'afichage
+    setCompteur(compteur + 1)
+
+  };
+
+
+  //  affichage (render)
   return (
-    <>
-    <div className='p-4 flex flex-col gap-4'>
-      <Lago color="blue"/>
-      <Lago color="red"/>
-      </div>
-    </>
+
+    <div>
+      <h1>{compteur}</h1>
+      <button onClick={handleClick}>increment</button> 
+    </div> // je branche un comportement
   );
 }
 
-function Lago(props) {
-  let classes = "h-16 w-32"; 
-
-  if (props.color === "blue") {
-    classes += " bg-blue-500";
-  }
-
-  if (props.color === "red") {
-    classes += " bg-red-500";
-  }
-
-  return <div className={classes}></div>;
-}
+export default  App;
 
 
+
+
+
+/*
+composant
+      state ( etat , data)
+      comportement
+
+      affichage (render)
+      return jsx ( dev by facebook nous permet decreire html dans ja)
+
+      usestate ( function fournit pas la librarie react) ---> hook
+
+-------------------------------------------------------------------------------------------
+      NB: ne modiier jamais un state directement. tjr passer par le setters
+
+*/
