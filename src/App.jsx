@@ -1,6 +1,8 @@
 // import { useState } from "react";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
+import Fruit from "./components/Fruit"
+import FruitForm from "./components/FruitForm"
 
 
 
@@ -15,13 +17,6 @@ function App() {   // on vas cree les ccommposant fonctionel
   ]);
  // deuxieme partie du state
 
-const [nouveauFruit , SetNouveauFruit] = useState("")
-
-  // c'est possible de mettre du js dans une variable
-const voiture =  <li>rav4</li>
-
-// un tab de voitures
-const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
 
 
  // ------------------------------------------------------------------------------------------------------------
@@ -43,26 +38,7 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
 
   // formulaire
 
-  const handlesubmit = (event) => {
-    event.preventDefault(); // pour eviter le rechargement de la page
-    const fruitsCopie = [...fruits];
 
-    const id  = new Date().getTime();
-    const nom = nouveauFruit;
-    fruitsCopie.push({id: id , nom: nom})
-    setaFruits(fruitsCopie);
-    SetNouveauFruit("");
-
-    
-  }
-
-  const handleChange = (event) => {
-
-    const valueAfterChange = event.target.value
-    SetNouveauFruit(valueAfterChange);
-    
-    
-  }
 
 
   //-------------------------------------------------------------------------------------------------------------
@@ -75,20 +51,11 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
     <h1>Liste fruit</h1>
     <ul>
         {fruits.map((fruit)=> (// fruit c'est la variable qui vas parcourit le tab js
-          <li key={fruit.id}>
-            {fruit.nom}<button onClick={() =>handleDelete(fruit.id)}>x</button>
-          </li>
+
+          <Fruit key={fruit.id} fruitInfo = {fruit} onFruitDelete = {handleDelete}/> // passage des props a l'enfant
         ))}
    </ul>
-        <form action="submit" onSubmit={handlesubmit}>
-          <input 
-          value={nouveauFruit} 
-          placeholder="Ajouter un fruit" 
-          onChange={handleChange}
-          />
-          <button>Ajouter +</button>
-        </form>
-
+       <FruitForm bfruits = {fruits} SetaFruits = {setaFruits}/>
   </div>
   
   );
@@ -150,6 +117,18 @@ NB: on evite le useref car il ne fournit pas le re render de l'affichage automat
 evenement onChange
 
 push ajout un elementt en fin du tab
+
+------------------------------------------------------------------
+on essage de decouper le code en petit composant
+
+1. cree dosier component > 
+
+-on fait passer des props du composant parent au composant enfant
+- on doit aussi recevoir les props dans le composant enfant
+- l'enant consome les props
+
+
+-c'est mieux de porter un composant enfant avec tout ce quil a besoin
 
 
 
