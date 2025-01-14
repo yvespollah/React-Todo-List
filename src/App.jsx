@@ -51,6 +51,7 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
     const nom = nouveauFruit;
     fruitsCopie.push({id: id , nom: nom})
     setaFruits(fruitsCopie);
+    SetNouveauFruit("");
 
     
   }
@@ -58,7 +59,9 @@ const voitures =  [<li>mercedes</li> , <li>2ba2</li> , <li>popof</li> ]
   const handleChange = (event) => {
 
     const valueAfterChange = event.target.value
-    SetNouveauFruit(valueAfterChange)
+    SetNouveauFruit(valueAfterChange);
+    
+    
   }
 
 
